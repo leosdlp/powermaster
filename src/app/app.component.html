@@ -3,7 +3,7 @@
     <div class="col-12">
       <div class="row">
         <a class="col-1" routerLink="/seance-list" [routerLinkActive]="['active']" (click)="ngOnInit()">Séance list</a>
-        <a class="col-1" routerLink="/user-list" [routerLinkActive]="['active']" (click)="ngOnInit()" *ngIf="isAdmin()">User list</a>
+        <a class="col-1" routerLink="/user-list" [routerLinkActive]="['active']" (click)="ngOnInit()">User list</a>
         <a class="col-1" routerLink="/connexion" [routerLinkActive]="['active']" (click)="ngOnInit()" *ngIf="!isLoggedIn()">Connexion</a>
         <a class="col-1" routerLink="/profil" [routerLinkActive]="['active']" (click)="ngOnInit()" *ngIf="isLoggedIn()">Profil</a>
       </div>
