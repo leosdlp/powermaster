@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiUrlService {
-  readonly APIUrl = 'http://localhost:5000/';
+  readonly APIUrl = 'https://apipowermaster.onrender.com/';
 
   constructor() {}
 }
