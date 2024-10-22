@@ -1,1 +1,4 @@
-<p>seance-list works!</p>
+<a class="col-1" routerLink="/seance-create" [routerLinkActive]="['active']">Créer une séance</a>
+<div *ngFor="let seance of seances" class="col-3">
+  <p>{{ seance.benchType }}</p>
+</div>

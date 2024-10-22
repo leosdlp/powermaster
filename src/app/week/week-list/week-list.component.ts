@@ -1,7 +1,9 @@
 import { AdminAuthService } from '../../service/admin-auth.service';
 import { Seance } from '../../model/seance.model';
+import { Week } from '../../model/week.model';
 import { ApiUrlService } from '../../service/api-url.service';
 import { SeanceService } from '../../service/seance.service';
+import { WeekService } from '../../service/week.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,32 +15,32 @@ import { Injectable } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 
-
 @Component({
-  selector: 'app-seance-list',
+  selector: 'app-week-list',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterOutlet, RouterModule, HttpClientModule],
-  templateUrl: './seance-list.component.html',
-  styleUrl: './seance-list.component.css'
+  templateUrl: './week-list.component.html',
+  styleUrl: './week-list.component.css'
 })
-export class SeanceListComponent implements OnInit{
-  seances: Seance[] = [];
-  seancesTemp: any = [];
-  constructor(private apiUrlService: ApiUrlService, private authService: AdminAuthService, private http: HttpClient, private fb: FormBuilder, private router: Router, private seanceService: SeanceService) {
+export class WeekListComponent implements OnInit{
+  weeks: Week[] = []
+  weeksTemp: any = [];
+
+  constructor(private apiUrlService: ApiUrlService, private authService: AdminAuthService, private http: HttpClient, private fb: FormBuilder, private router: Router, private seanceService: SeanceService, private weekService: WeekService) {
 
   }
 
   ngOnInit(): void {
-    this.refreshSeances();
-      this.seances = this.seanceService.getSeances();
+    this.refreshWeeks();
+      this.weeks = this.weekService.getWeeks();
   }
 
-  async refreshSeances() {
-    this.http.get(this.apiUrlService.APIUrl + 'GetSeances').subscribe(data => {
-      this.seanceService.seancesTemp = data;
-      this.seancesTemp = data;
+  async refreshWeeks() {
+    this.http.get(this.apiUrlService.APIUrl + 'GetWeeks').subscribe(data => {
+      this.weekService.weeksTemp = data;
+      this.weeksTemp = data;
     });
-    this.seanceService.setApiSeances();
-    this.seanceService.getSeances();
+    this.weekService.setApiWeeks();
+    this.weekService.getWeeks();
   }
 }

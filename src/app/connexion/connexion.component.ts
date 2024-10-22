@@ -1,5 +1,5 @@
-import { AdminAuthService } from '../admin-auth.service';
-import { ApiUrlService } from '../api-url.service';
+import { AdminAuthService } from '../service/admin-auth.service';
+import { ApiUrlService } from '../service/api-url.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';

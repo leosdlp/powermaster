@@ -1,0 +1,4 @@
+<a class="col-1" routerLink="/week-create" [routerLinkActive]="['active']">Créer une week</a>
+<div *ngFor="let week of weeks" class="col-3">
+  <p>Semaine {{ week.dateDebut.toLocaleString() }}</p>
+</div>

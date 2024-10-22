@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiUrlService } from '../../api-url.service';
+import { ApiUrlService } from '../../service/api-url.service';
 import { RouterOutlet } from '@angular/router';
 import { routes } from '../../app.routes';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
-import { AdminAuthService } from '../../admin-auth.service'
+import { AdminAuthService } from '../../service/admin-auth.service'
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
