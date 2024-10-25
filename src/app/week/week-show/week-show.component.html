@@ -1,0 +1,14 @@
+<div class="col-12">
+  <p>Semaine {{ weekId }}</p>
+  <div class="col-12" *ngFor="let seance of seancesToShow; let i = index">
+    <div class="row" *ngIf="isHiddenSeance(seance)">
+      <button class="col-1" (click)="createSeance(i + 1)" style="cursor: pointer;">Créer séance {{ i + 1 }}</button>
+    </div>
+    <div class="row" *ngIf="!isHiddenSeance(seance)">
+      <p>Séance {{ i + 1 }}</p>
+      <button class="col-1" (click)="deleteSeance(seance.id)" style="cursor: pointer;">Supprimer</button>
+      <button class="col-1" (click)="updateSeance(seance.id)" style="cursor: pointer;">Modifier</button>
+      <button class="col-1" (click)="showSeance(seance.id)" style="cursor: pointer;">voir</button>
+    </div>
+  </div>
+</div>

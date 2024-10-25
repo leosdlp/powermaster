@@ -11,7 +11,7 @@
         </div>
         <div>
           <label for="password">Nouveau mot de passe:</label>
-          <input formControlName="password" type="password" [(ngModel)]="newPassword" [placeholder]="this.password">
+          <input formControlName="password" type="password" [(ngModel)]="newPassword">
         </div>
         <div>
           <label for="password">Confirmez le mot de passe:</label>
@@ -21,7 +21,19 @@
           <label for="email">Email:</label>
           <input formControlName="email" type="email" [(ngModel)]="newEmail" [placeholder]="this.email">
         </div>
-        <button (click)="updateUser()">Update User</button>
+        <div>
+          <label for="benchPr">Bench Pr:</label>
+          <input formControlName="benchPr" type="benchPr" [(ngModel)]="benchPr">
+        </div>
+        <div>
+          <label for="squatPr">Squat Pr:</label>
+          <input formControlName="squatPr" type="squatPr" [(ngModel)]="squatPr">
+        </div>
+        <div>
+          <label for="deadliftPr">Deadlift Pr:</label>
+          <input formControlName="deadliftPr" type="deadliftPr" [(ngModel)]="deadliftPr">
+        </div>
+        <button type="submit">Update User</button>
       </form>
     </div>
     <div class="row deco">

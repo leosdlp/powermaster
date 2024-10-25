@@ -1,0 +1,25 @@
+<div class="col-12">
+  <p>Seance {{ seanceId }}</p>
+  <div class="col-12" *ngFor="let showSeance of seance; let i = index">
+    <h2>Bench</h2>
+    <p>{{ showSeance.benchSerie }}x{{ showSeance.benchRep }} à {{ showSeance.benchPoids }}kg RPE{{ showSeance.benchRpe }} en {{ showSeance.benchType }}</p>
+    <h2>Bench Backoff</h2>
+    <p>{{ showSeance.benchBackoffSerie }}x{{ showSeance.benchBackoffRep }} à {{ showSeance.benchBackoffPoids }}kg RPE{{ showSeance.benchBackoffRpe }} en {{ showSeance.benchBackoffType }}</p>
+
+    <h2>Squat</h2>
+    <p>{{ showSeance.squatSerie }}x{{ showSeance.squatRep }} à {{ showSeance.squatPoids }}kg RPE{{ showSeance.squatRpe }} en {{ showSeance.squatType }}</p>
+    <h2>Squat Backoff</h2>
+    <p>{{ showSeance.squatBackoffSerie }}x{{ showSeance.squatBackoffRep }} à {{ showSeance.squatBackoffPoids }}kg RPE{{ showSeance.squatBackoffRpe }} en {{ showSeance.squatBackoffType }}</p>
+
+    <h2>Deadlift</h2>
+    <p>{{ showSeance.deadliftSerie }}x{{ showSeance.deadliftRep }} à {{ showSeance.deadliftPoids }}kg RPE{{ showSeance.deadliftRpe }} en {{ showSeance.deadliftType }}</p>
+    <h2>Deadlift Backoff</h2>
+    <p>{{ showSeance.deadliftBackoffSerie }}x{{ showSeance.deadliftBackoffRep }} à {{ showSeance.deadliftBackoffPoids }}kg RPE{{ showSeance.deadliftBackoffRpe }} en {{ showSeance.deadliftBackoffType }}</p>
+
+    <h2>Renfo</h2>
+    <p>{{ showSeance.renfo }}</p>
+
+    <h2>Commentaire</h2>
+    <p>{{ showSeance.commentaire }}</p>
+  </div>
+</div>

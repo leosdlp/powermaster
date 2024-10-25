@@ -29,7 +29,7 @@ export class WeekCreateComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.username = this.authService.getUsername();
+    this.username = this.authService.getUserId();
     this.weekForm = this.fb.group({
       nbSeances: [''],
       dateDebut: ['']

@@ -3,11 +3,12 @@
   <div class="col-12">
     <h2>{{ user.username }}</h2>
     <div class="infos row">
+      <p class="col-10">Id : {{ user.id }}</p>
       <p class="col-10">Email : {{ user.email }}</p>
     </div>
     <div class="buttons row">
-      <!-- <button (click)="supprimerFournisseur(fournisseur.id)" class="col-4">Supprimer</button>
-      <button (click)="modifierFournisseur(fournisseur.id)" class="col-4">Modifier</button> -->
+      <button (click)="deleteUser(user.id)" class="col-4">Supprimer</button>
+      <!-- <button (click)="modifierFournisseur(fournisseur.id)" class="col-4">Modifier</button> -->
     </div>
   </div>
 </div>

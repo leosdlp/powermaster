@@ -1,7 +1,8 @@
 export interface Seance {
-  id: number;
+  id: String;
   weekId: number;
   username: string;
+  numofSeance: number,
   benchSerie: number;
   benchRep: number;
   benchPoids: number;

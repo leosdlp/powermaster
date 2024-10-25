@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { SeanceService } from '../../service/seance.service';
 import { AdminAuthService } from '../../service/admin-auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,19 +19,20 @@ import { AdminAuthService } from '../../service/admin-auth.service';
   styleUrl: './seance-create.component.css'
 })
 export class SeanceCreateComponent implements OnInit{
-  constructor(private fb: FormBuilder, private http: HttpClient, private apiUrlService: ApiUrlService, private seanceService: SeanceService, private authService: AdminAuthService){
+  constructor(private fb: FormBuilder, private http: HttpClient, private apiUrlService: ApiUrlService, private seanceService: SeanceService, private authService: AdminAuthService, private route: ActivatedRoute, private router: Router){
   }
 
   [key: string]: any;
+  numofSeance: any = 0;
   seanceForm!: FormGroup;
   username: any = "";
-  weekId: any = 18;
+  weekId: any = 0;
   seancesTemp: any = [];
   benchSerie: number = 0;
   benchRep: number = 0;
   benchRpe: number = 0;
   benchPoids: number = 0;
-  benchPr: number = 130;
+  benchPr: number = 0;
   benchType: String = "tag";
   benchBackoffSerie: number = 0;
   benchBackoffRep: number = 0;
@@ -40,7 +43,7 @@ export class SeanceCreateComponent implements OnInit{
   squatRep: number = 0;
   squatRpe: number = 0;
   squatPoids: number = 0;
-  squatPr: number = 180;
+  squatPr: number = 0;
   squatType: String = "tag";
   squatBackoffSerie: number = 0;
   squatBackoffRep: number = 0;
@@ -51,7 +54,7 @@ export class SeanceCreateComponent implements OnInit{
   deadliftRep: number = 0;
   deadliftRpe: number = 0;
   deadliftPoids: number = 0;
-  deadliftPr: number = 240;
+  deadliftPr: number = 0;
   deadliftType: String = "tag";
   deadliftBackoffSerie: number = 0;
   deadliftBackoffRep: number = 0;
@@ -83,7 +86,12 @@ export class SeanceCreateComponent implements OnInit{
   };
 
   ngOnInit(): void {
-    this.username = this.authService.getUsername();
+    this.username = this.authService.getUserId();
+    this.numofSeance = this.getSeanceIdFromUrl();
+    this.weekId = this.getWeekIdFromUrl();
+    this.benchPr = this.authService.getUserPr("bench");
+    this.squatPr = this.authService.getUserPr("squat");
+    this.deadliftPr = this.authService.getUserPr("deadlift");
     this.seanceForm = this.fb.group({
       benchSerie: [''],
       benchRep: [''],
@@ -121,8 +129,9 @@ export class SeanceCreateComponent implements OnInit{
     this.refreshSeances();
   }
 
-  ajouterSeance() {
-    this.addSeances();
+  async ajouterSeance() {
+    await this.addSeances();
+    this.showWeek(this.weekId);
   }
 
   addSeances() {
@@ -137,6 +146,7 @@ export class SeanceCreateComponent implements OnInit{
 
     formData.append("username", this.username);
     formData.append("weekId", this.weekId);
+    formData.append("numofSeance", this.numofSeance);
     formData.append("benchSerie", this.seanceForm.value.benchSerie);
     formData.append("benchRep", this.seanceForm.value.benchRep);
     formData.append("benchPoids", this.seanceForm.value.benchPoids);
@@ -208,5 +218,19 @@ export class SeanceCreateComponent implements OnInit{
   arrondirParMultipleDe2_5(valeur: number): number {
     const multiple = 2.5;
     return Math.round(valeur / multiple) * multiple;
+  }
+
+  getSeanceIdFromUrl(): number {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    return id;
+  }
+
+  getWeekIdFromUrl(): String {
+    const id = String(this.route.snapshot.paramMap.get('weekId'));
+    return id;
+  }
+
+  showWeek(id: number) {
+    this.router.navigate(['/week-show', id]);
   }
 }

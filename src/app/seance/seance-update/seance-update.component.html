@@ -1,1 +1,349 @@
-<p>seance-update works!</p>
+<div class="container">
+  <form [formGroup]="seanceForm" (ngSubmit)="modifierSeance()">
+    <div class="row">
+      <h1>Créer une séance</h1>
+      <div style="display: flex;">
+        <div class="col-6" style="width: 50%;">
+          <h2>Bench</h2>
+          <div class="row" style="gap: 1rem;display: flex;">
+            <select id="benchType" formControlName="benchType" [(ngModel)]="benchType" class="col-12" (change)="refreshPoids('bench')">
+              <option value="tag" selected>Touch and Go</option>
+              <option value="larsen">Larsen Press</option>
+              <option value="tempo-3-1-0">Tempo 3-1-0</option>
+              <option value="tempo-4-2-4">Tempo 4-2-4</option>
+              <option value="1ct">Pause 1ct</option>
+              <option value="2ct">Pause 2ct</option>
+              <option value="3ct">Pause 3ct</option>
+              <option value="4ct">Pause 4ct</option>
+              <option value="5ct">Pause 5ct</option>
+            </select>
+
+            <select id="benchSerie" formControlName="benchSerie" [(ngModel)]="this.benchSerie" class="col-12">
+              <option value="0">Séries</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+
+            <select id="benchRep" formControlName="benchRep" [(ngModel)]="this.benchRep" class="col-2" (change)="refreshPoids('bench')">
+              <option value="0">Reps</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+
+            <select id="benchRpe" formControlName="benchRpe" [(ngModel)]="this.benchRpe" class="col-2" (change)="refreshPoids('bench');">
+              <option value="0">Rpe</option>
+              <option value="7">7</option>
+              <option value="7.5">7.5</option>
+              <option value="8">8</option>
+              <option value="8.5">8.5</option>
+              <option value="9">9</option>
+              <option value="9.5">9.5</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+
+          <div class="row" style="gap: 1rem;display: flex;">
+            <label for="benchPoids" class="col-1">Poids :</label>
+            <input type="number" id="benchPoids" formControlName="benchPoids" [(ngModel)]="this.benchPoids" style="width: 2.5rem;">
+          </div>
+
+          <h2>Bench Backoff</h2>
+          <div class="row" style="gap: 1rem;display: flex;">
+            <select id="benchBackoffType" formControlName="benchBackoffType" [(ngModel)]="this.benchBackoffType" class="col-12" (change)="refreshPoids('benchBackoff')">
+              <option value="tag" selected>Touch and Go</option>
+              <option value="larsen">Larsen Press</option>
+              <option value="tempo-3-1-0">Tempo 3-1-0</option>
+              <option value="1ct">Pause 1ct</option>
+              <option value="2ct">Pause 2ct</option>
+              <option value="3ct">Pause 3ct</option>
+              <option value="4ct">Pause 4ct</option>
+              <option value="5ct">Pause 5ct</option>
+            </select>
+
+            <select id="benchBackoffSerie" formControlName="benchBackoffSerie" [(ngModel)]="this.benchBackoffSerie" class="col-12">
+              <option value="0">Séries</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+
+            <select id="benchBackoffRep" formControlName="benchBackoffRep" [(ngModel)]="this.benchBackoffRep" class="col-2" (change)="refreshPoids('benchBackoff')">
+              <option value="0">Reps</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+
+            <select id="benchBackoffRpe" formControlName="benchBackoffRpe" [(ngModel)]="this.benchBackoffRpe" class="col-2" (change)="refreshPoids('benchBackoff');">
+              <option value="0">Rpe</option>
+              <option value="7">7</option>
+              <option value="7.5">7.5</option>
+              <option value="8">8</option>
+              <option value="8.5">8.5</option>
+              <option value="9">9</option>
+              <option value="9.5">9.5</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+
+          <div class="row" style="gap: 1rem;display: flex;">
+            <label for="benchBackoffPoids" class="col-2">Poids :</label>
+            <input type="number" id="benchBackoffPoids" formControlName="benchBackoffPoids" [(ngModel)]="this.benchBackoffPoids" style="width: 2.5rem;">
+          </div>
+
+          <h2>Deadlift</h2>
+          <div class="row" style="gap: 1rem;display: flex;">
+            <select id="deadliftType" formControlName="deadliftType" [(ngModel)]="deadliftType" class="col-12" (change)="refreshPoids('deadlift')">
+              <option value="tag" selected>Classique</option>
+              <option value="alt">Alt</option>
+              <option value="1ct">Pause 1ct</option>
+              <option value="2ct">Pause 2ct</option>
+              <option value="3ct">Pause 3ct</option>
+              <option value="4ct">Pause 4ct</option>
+              <option value="5ct">Pause 5ct</option>
+            </select>
+
+            <select id="deadliftSerie" formControlName="deadliftSerie" [(ngModel)]="this.deadliftSerie" class="col-12">
+              <option value="0">Séries</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+
+            <select id="deadliftRep" formControlName="deadliftRep" [(ngModel)]="this.deadliftRep" class="col-2" (change)="refreshPoids('deadlift')">
+              <option value="0">Reps</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+
+            <select id="deadliftRpe" formControlName="deadliftRpe" [(ngModel)]="this.deadliftRpe" class="col-2" (change)="refreshPoids('deadlift');">
+              <option value="0">Rpe</option>
+              <option value="7">7</option>
+              <option value="7.5">7.5</option>
+              <option value="8">8</option>
+              <option value="8.5">8.5</option>
+              <option value="9">9</option>
+              <option value="9.5">9.5</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+
+          <div class="row" style="gap: 1rem;display: flex;">
+            <label for="deadliftPoids" class="col-2">Poids :</label>
+            <input type="number" id="deadliftPoids" formControlName="deadliftPoids" [(ngModel)]="this.deadliftPoids" style="width: 2.5rem;">
+          </div>
+
+          <h2>Deadlift Backoff</h2>
+          <div class="row" style="gap: 1rem;display: flex;">
+            <select id="deadliftBackoffType" formControlName="deadliftBackoffType" [(ngModel)]="this.deadliftBackoffType" class="col-12" (change)="refreshPoids('deadliftBackoff')">
+              <option value="tag" selected>Classique</option>
+              <option value="alt">Alt</option>
+              <option value="1ct">Pause 1ct</option>
+              <option value="2ct">Pause 2ct</option>
+              <option value="3ct">Pause 3ct</option>
+              <option value="4ct">Pause 4ct</option>
+              <option value="5ct">Pause 5ct</option>
+            </select>
+
+            <select id="deadliftBackoffSerie" formControlName="deadliftBackoffSerie" [(ngModel)]="this.deadliftBackoffSerie" class="col-12">
+              <option value="0">Séries</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+
+            <select id="deadliftBackoffRep" formControlName="deadliftBackoffRep" [(ngModel)]="this.deadliftBackoffRep" class="col-2" (change)="refreshPoids('deadliftBackoff')">
+              <option value="0">Reps</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+
+            <select id="deadliftBackoffRpe" formControlName="deadliftBackoffRpe" [(ngModel)]="this.deadliftBackoffRpe" class="col-2" (change)="refreshPoids('deadliftBackoff');">
+              <option value="0">Rpe</option>
+              <option value="7">7</option>
+              <option value="7.5">7.5</option>
+              <option value="8">8</option>
+              <option value="8.5">8.5</option>
+              <option value="9">9</option>
+              <option value="9.5">9.5</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+
+          <div class="row" style="gap: 1rem;display: flex;">
+            <label for="deadliftBackoffPoids" class="col-2">Poids :</label>
+            <input type="number" id="deadliftBackoffPoids" formControlName="deadliftBackoffPoids" [(ngModel)]="this.deadliftBackoffPoids" style="width: 2.5rem;">
+          </div>
+
+        </div>
+        <div class="col-6" style="width: 50%;">
+          <h2>Squat</h2>
+          <div class="row" style="gap: 1rem;display: flex;">
+            <select id="squatType" formControlName="squatType" [(ngModel)]="squatType" class="col-12" (change)="refreshPoids('squat')">
+              <option value="tag" selected>Classique</option>
+              <option value="tempo-3-1-0">Tempo 3-1-0</option>
+              <option value="tempo-4-2-4">Tempo 4-2-4</option>
+              <option value="1ct">Pause 1ct</option>
+              <option value="2ct">Pause 2ct</option>
+              <option value="3ct">Pause 3ct</option>
+              <option value="4ct">Pause 4ct</option>
+              <option value="5ct">Pause 5ct</option>
+            </select>
+
+            <select id="squatSerie" formControlName="squatSerie" [(ngModel)]="this.squatSerie" class="col-12">
+              <option value="0">Séries</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+
+            <select id="squatRep" formControlName="squatRep" [(ngModel)]="this.squatRep" class="col-2" (change)="refreshPoids('squat')">
+              <option value="0">Reps</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+
+            <select id="squatRpe" formControlName="squatRpe" [(ngModel)]="this.squatRpe" class="col-2" (change)="refreshPoids('squat');">
+              <option value="0">Rpe</option>
+              <option value="7">7</option>
+              <option value="7.5">7.5</option>
+              <option value="8">8</option>
+              <option value="8.5">8.5</option>
+              <option value="9">9</option>
+              <option value="9.5">9.5</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+
+          <div class="row" style="gap: 1rem;display: flex;">
+            <label for="squatPoids" class="col-2">Poids :</label>
+            <input type="number" id="squatPoids" formControlName="squatPoids" [(ngModel)]="this.squatPoids" style="width: 2.5rem;">
+          </div>
+
+          <h2>Squat Backoff</h2>
+          <div class="row" style="gap: 1rem;display: flex;">
+            <select id="squatBackoffType" formControlName="squatBackoffType" [(ngModel)]="this.squatBackoffType" class="col-12" (change)="refreshPoids('squatBackoff')">
+              <option value="tag" selected>Classique</option>
+              <option value="tempo-3-1-0">Tempo 3-1-0</option>
+              <option value="tempo-4-2-4">Tempo 4-2-4</option>
+              <option value="1ct">Pause 1ct</option>
+              <option value="2ct">Pause 2ct</option>
+              <option value="3ct">Pause 3ct</option>
+              <option value="4ct">Pause 4ct</option>
+              <option value="5ct">Pause 5ct</option>
+            </select>
+
+            <select id="squatBackoffSerie" formControlName="squatBackoffSerie" [(ngModel)]="this.squatBackoffSerie" class="col-12">
+              <option value="0">Séries</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+
+            <select id="squatBackoffRep" formControlName="squatBackoffRep" [(ngModel)]="this.squatBackoffRep" class="col-2" (change)="refreshPoids('squatBackoff')">
+              <option value="0">Reps</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+
+            <select id="squatBackoffRpe" formControlName="squatBackoffRpe" [(ngModel)]="this.squatBackoffRpe" class="col-2" (change)="refreshPoids('squatBackoff');">
+              <option value="0">Rpe</option>
+              <option value="7">7</option>
+              <option value="7.5">7.5</option>
+              <option value="8">8</option>
+              <option value="8.5">8.5</option>
+              <option value="9">9</option>
+              <option value="9.5">9.5</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+
+          <div class="row" style="gap: 1rem;display: flex;">
+            <label for="squatBackoffPoids" class="col-2">Poids :</label>
+            <input type="number" id="squatBackoffPoids" formControlName="squatBackoffPoids" [(ngModel)]="this.squatBackoffPoids" style="width: 2.5rem;">
+          </div>
+
+          <div class="row">
+            <h2>Renfo</h2>
+            <div class="row">
+              <select id="renfo" formControlName="renfo" [(ngModel)]="this.renfo" class="col-12">
+                <option value="pec-triceps" selected>Pec/Triceps</option>
+                <option value="dos-biceps">Dos/Biceps</option>
+                <option value="jambes">Jambes</option>
+                <option value="pec">Pec</option>
+                <option value="triceps">Triceps</option>
+                <option value="dos">Dos</option>
+                <option value="biceps">Biceps</option>
+              </select>
+            </div>
+
+            <h2>Commentaire</h2>
+            <input type="text" id="commentaire" formControlName="commentaire" [(ngModel)]="this.commentaire" style="width: 90%;">
+          </div>
+        </div>
+      </div>
+      <div class="buttons row" style="display: flex; place-content: center; gap: 1rem;">
+        <div class="col-4">
+          <button (click)="showWeek(this.weekId)" class="col-12">Retour</button>
+        </div>
+        <div class="col-4">
+          <button type="submit" class="col-12">Confirmer</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

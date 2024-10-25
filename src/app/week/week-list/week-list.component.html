@@ -1,4 +1,9 @@
 <a class="col-1" routerLink="/week-create" [routerLinkActive]="['active']">Créer une week</a>
 <div *ngFor="let week of weeks" class="col-3">
-  <p>Semaine {{ week.dateDebut.toLocaleString() }}</p>
+  <div id="{{ week.id }}">
+    <p>Semaine {{ weeks.indexOf(week) + 1 }}</p>
+    <button (click)="deleteWeek(week.id)" class="col-12">Supprimer</button>
+    <button (click)="updateWeek(week.id)" class="col-12">Modifier</button>
+    <button (click)="showWeek(week.id)" class="col-12">Voir</button>
+  </div>
 </div>

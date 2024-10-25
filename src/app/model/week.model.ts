@@ -1,5 +1,5 @@
 export interface Week {
-  id: number;
+  id: String;
   username: string;
   nbSeances: number;
   dateDebut: Date;

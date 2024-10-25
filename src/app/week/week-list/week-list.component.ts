@@ -25,6 +25,7 @@ import { HttpClient } from '@angular/common/http';
 export class WeekListComponent implements OnInit{
   weeks: Week[] = []
   weeksTemp: any = [];
+  userId: any;
 
   constructor(private apiUrlService: ApiUrlService, private authService: AdminAuthService, private http: HttpClient, private fb: FormBuilder, private router: Router, private seanceService: SeanceService, private weekService: WeekService) {
 
@@ -32,7 +33,8 @@ export class WeekListComponent implements OnInit{
 
   ngOnInit(): void {
     this.refreshWeeks();
-      this.weeks = this.weekService.getWeeks();
+    this.userId = this.authService.getUserId()
+    this.weeks = this.weekService.getWeekByUserId(this.userId);
   }
 
   async refreshWeeks() {
@@ -42,5 +44,20 @@ export class WeekListComponent implements OnInit{
     });
     this.weekService.setApiWeeks();
     this.weekService.getWeeks();
+  }
+
+  showWeek(id: any) {
+    this.router.navigate(['/week-show', id]);
+  }
+
+  updateWeek(id: any) {
+    this.router.navigate(['/week-update', id]);
+  }
+
+  deleteWeek(id:any){
+    this.http.delete(this.apiUrlService.APIUrl + 'DeleteWeeks?id='+String(id)).subscribe(data=>{
+      alert(data);
+    })
+    this.refreshWeeks();
   }
 }

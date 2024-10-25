@@ -24,17 +24,24 @@ export class ProfilComponent implements OnInit{
   username:string = "";
   password:string = "";
   email:string = "";
+  benchPr: number = 0;
+  squatPr: number = 0;
+  deadliftPr: number = 0;
   newUsername?: string;
   newPassword?: string;
   newConfirmPassword?: string;
   newEmail?: string;
   usersTemp: any = [];
   userForm!: FormGroup;
+  userId: any;
   constructor(private apiUrlService: ApiUrlService, private router: Router, private authService: AdminAuthService, private http: HttpClient, private fb: FormBuilder){
     this.userForm = this.fb.group({
       username: ['',Validators.required],
       password: ['',Validators.required],
-      email: ['',Validators.required]
+      email: ['',Validators.required],
+      benchPr: [this.benchPr,Validators.required],
+      squatPr: [this.squatPr,Validators.required],
+      deadliftPr: [this.deadliftPr,Validators.required],
     });
   }
 
@@ -45,40 +52,48 @@ export class ProfilComponent implements OnInit{
       this.username = currentUser.username;
       this.password = currentUser.password;
       this.email = currentUser.email;
+      this.benchPr = currentUser.benchPr;
+      this.squatPr = currentUser.squatPr;
+      this.deadliftPr = currentUser.deadliftPr;
     }
+    this.userId = this.authService.getUserId();
+    this.newUsername = this.username;
+    this.newEmail = this.email;
   }
 
   updateUser() {
-    // if (this.newPassword == this.newConfirmPassword){
-    //   const currentUsername = this.username;
-    //   const updatedUsername = this.newUsername;
-    //   const updatedPassword = this.newPassword;
-    //   const updatedEmail = this.newEmail;
+    if (!this.userForm.value.username || !this.userForm.value.password || !this.userForm.value.email || !this.userForm.value.benchPr || !this.userForm.value.squatPr || !this.userForm.value.deadliftPr ) {
+      alert('username, password, email, benchPr, squatPr and deadliftPr are required');
+      return;
+    }
+    const formData = new FormData();
 
-    //   if (!currentUsername) {
-    //     alert("Current username is required");
-    //     return;
-    //   }
+    formData.append("id", String(this.userId));
+    formData.append("username", this.userForm.value.username);
+    formData.append("password", this.userForm.value.password);
+    formData.append("email", this.userForm.value.email);
+    formData.append("benchPr", this.userForm.value.benchPr);
+    formData.append("squatPr", this.userForm.value.squatPr);
+    formData.append("deadliftPr", this.userForm.value.deadliftPr);
 
-    //   const formData = new FormData();
-    //   formData.append("username", currentUsername);
-    //   if (updatedUsername) formData.append("newUsername", updatedUsername);
-    //   if (updatedPassword) formData.append("newPassword", updatedPassword);
-    //   if (updatedEmail) formData.append("newEmail", updatedEmail);
-
-    //   this.http.post(this.APIUrl + 'UpdateUsers', formData).subscribe(
-    //     data => {
-    //       alert('User updated successfully');
-    //       this.deconnect();
-    //     },
-    //     error => {
-    //       console.error('Error updating user:', error);
-    //     }
-    //   );
-    // }
-    // else {
-    //   alert("Les deux mots de passe ne correspondent pas")
-    // }
+    this.http.post(this.apiUrlService.APIUrl + 'UpdateUsers', formData).subscribe(data => {
+      alert(data);
+    }, error => {
+      alert('Error updating user');
+    });
+    const currentUserString = localStorage.getItem('currentUser');
+    if (currentUserString) {
+      const currentUser = JSON.parse(currentUserString);
+      currentUser.id = this.userId;
+      currentUser.username = this.userForm.value.username;
+      currentUser.password = this.userForm.value.password;
+      currentUser.email = this.userForm.value.email;
+      currentUser.benchPr = this.userForm.value.benchPr;
+      currentUser.squatPr = this.userForm.value.squatPr;
+      currentUser.deadliftPr = this.userForm.value.deadliftPr;
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    }
+    this.refreshUsers();
   }
 
   deconnect(): void{

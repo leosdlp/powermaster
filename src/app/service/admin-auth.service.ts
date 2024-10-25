@@ -14,7 +14,7 @@ export class AdminAuthService {
     const newUsers = [];
     const temp = this.usersTemp;
     for (const user of temp) {
-      newUsers.push({ username: user.username, password: user.password, email: user.email });
+      newUsers.push({ id: user._id, username: user.username, password: user.password, email: user.email, benchPr: user.benchPr, squatPr: user.squatPr, deadliftPr: user.deadliftPr });
     }
     this.users = newUsers;
   }
@@ -58,14 +58,46 @@ export class AdminAuthService {
     return false;
   }
 
-  register(username: string, password: string, verifPassword: string, email: string): boolean {
+  getUserId(){
+    try {
+      const currentUserString = localStorage.getItem('currentUser');
+      if (currentUserString) {
+        const currentUser = JSON.parse(currentUserString);
+        return currentUser.id;
+      }
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+    }
+    return false;
+  }
+
+  getUserPr(exercice: String){
+    try {
+      const currentUserString = localStorage.getItem('currentUser');
+      if (currentUserString) {
+        const currentUser = JSON.parse(currentUserString);
+        if (exercice === 'bench') {
+          return currentUser.benchPr;
+        } else if (exercice === 'squat') {
+          return currentUser.squatPr;
+        } else if (exercice === 'deadlift') {
+          return currentUser.deadliftPr;
+        }
+      }
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+    }
+    return false;
+  }
+
+  register(id:string, username: string, password: string, verifPassword: string, email: string, benchPr: number, squatPr: number, deadliftPr: number): boolean {
     const existingUser = this.users.find((user) => user.username === username);
     if (existingUser && username === 'admin') {
       return false;
     }
     else{
       if (!existingUser && verifPassword == password){
-        this.users.push({ username, password, email });
+        this.users.push({ id, username, password, email, benchPr, squatPr, deadliftPr });
         return true;
       }
     }
@@ -100,10 +132,10 @@ export class AdminAuthService {
   modifierUsername(nouveauNom: string): boolean {
     const currentUserString = localStorage.getItem('currentUser');
     if (currentUserString) {
-        const currentUser = JSON.parse(currentUserString);
-        currentUser.username = nouveauNom;
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        return true;
+      const currentUser = JSON.parse(currentUserString);
+      currentUser.username = nouveauNom;
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      return true;
     }
     return false;
   }
@@ -111,10 +143,10 @@ export class AdminAuthService {
   modifierPassword(nouveauMdp: string): boolean {
       const currentUserString = localStorage.getItem('currentUser');
       if (currentUserString) {
-          const currentUser = JSON.parse(currentUserString);
-          currentUser.password = nouveauMdp;
-          localStorage.setItem('currentUser', JSON.stringify(currentUser));
-          return true;
+        const currentUser = JSON.parse(currentUserString);
+        currentUser.password = nouveauMdp;
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        return true;
       }
       return false;
   }

@@ -39,4 +39,11 @@ export class UserListComponent implements OnInit{
     });
     this.authService.setApiUsers();
   }
+
+  deleteUser(id: any) {
+    this.http.delete(this.apiUrlService.APIUrl + 'DeleteUsers?id='+String(id)).subscribe(data=>{
+      alert(data);
+    })
+    this.refreshUsers();
+  }
 }

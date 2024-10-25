@@ -1,0 +1,36 @@
+<div class="container">
+  <form [formGroup]="weekForm" (ngSubmit)="modifierWeek()">
+    <div class="row">
+      <h1>Créer une week</h1>
+      <div style="display: flex;">
+        <div class="col-12" style="width: 100%;">
+          <div class="row">
+            <label for="nbSeances">Nombre de séances : </label>
+            <select id="nbSeances" formControlName="nbSeances" [(ngModel)]="nbSeances" class="col-12">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+            </select>
+          </div>
+          <div class="row">
+            <label for="dateDebut">Date de début</label>
+            <input type="date" id="dateDebut" formControlName="dateDebut" [(ngModel)]="dateDebut" class="col-12">
+          </div>
+        </div>
+      </div>
+      <div class="buttons row" style="display: flex; place-content: center; gap: 1rem;">
+        <div class="col-4">
+          <button routerLink="/week-list" routerLinkActive="active" class="col-12">Retour</button>
+        </div>
+        <div class="col-4">
+          <button type="submit" class="col-12">Confirmer</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+

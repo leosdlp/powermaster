@@ -28,6 +28,10 @@ export class ConnexionComponent implements OnInit{
   connexion: boolean = true;
   inscription: boolean = false;
   usersTemp: any = [];
+  id:string = '';
+  benchPr: number = 0;
+  squatPr: number = 0;
+  deadliftPr: number = 0;
 
 
   constructor(private apiUrlService: ApiUrlService, private authService: AdminAuthService, private http: HttpClient, private fb: FormBuilder, private router: Router) {
@@ -57,7 +61,7 @@ export class ConnexionComponent implements OnInit{
   }
 
   addUsers() {
-    if (!this.username || !this.password || !this.email) {
+    if (!this.username || !this.password || !this.email || !this.benchPr || !this.squatPr || !this.deadliftPr) {
       alert("Username and password are required");
       return;
     }
@@ -65,6 +69,9 @@ export class ConnexionComponent implements OnInit{
     formData.append("username", this.username);
     formData.append("password", this.password);
     formData.append("email", this.email);
+    formData.append("benchPr", String(this.benchPr));
+    formData.append("squatPr", String(this.squatPr));
+    formData.append("deadliftPr", String(this.deadliftPr));
 
     this.http.post(this.apiUrlService.APIUrl + 'AddUsers', formData).subscribe(data => {
       alert(data);
@@ -75,7 +82,7 @@ export class ConnexionComponent implements OnInit{
 
   register(): void {
     const verifPassword = this.password == this.passwordVerif;
-    const success = this.authService.register(this.username, this.password, this.passwordVerif, this.email);
+    const success = this.authService.register(this.id, this.username, this.password, this.passwordVerif, this.email, this.benchPr, this.squatPr, this.deadliftPr);
     if (success) {
       if(verifPassword){
         this.addUsers();

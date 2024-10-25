@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Seance } from '../model/seance.model';
+import { WeekCreateComponent } from '../week/week-create/week-create.component';
 
 @Injectable({
   providedIn: 'root',
@@ -17,13 +18,26 @@ export class SeanceService {
     return this.seances;
   }
 
+  getSeancesById(id: String): Seance[] {
+    this.setApiSeances();
+    const seances = this.seances.filter((seance: Seance) => String(seance.id) === String(id));
+    return seances;
+  }
+
+  getSeancesByWeekId(id: String): Seance[] {
+    this.setApiSeances();
+    const seances = this.seances.filter((seance: Seance) => String(seance.weekId) === String(id));
+    return seances;
+  }
+
   setApiSeances() {
     const newSeances = [];
     for (const seance of this.seancesTemp) {
       newSeances.push({
-        id: seance.id,
+        id: seance._id,
         weekId: seance.weekId,
         username: seance.username,
+        numofSeance: seance.numofSeance,
         benchSerie: seance.benchSerie,
         benchRep: seance.benchRep,
         benchPoids: seance.benchPoids,
