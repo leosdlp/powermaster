@@ -29,7 +29,11 @@ export class UserListComponent implements OnInit{
 
   ngOnInit(): void {
     this.refreshUsers();
-    this.users = this.authService.getUsers();
+    if (this.isSuperAdmin()) {
+      this.users = this.authService.getUsers();
+    } else {
+      this.users = this.authService.getUsers().filter((user: User) => String(user.role) !== 'superadmin');
+    }
   }
 
   refreshUsers() {
@@ -45,5 +49,17 @@ export class UserListComponent implements OnInit{
       alert(data);
     })
     this.refreshUsers();
+  }
+
+  modifierUser(id: any) {
+    this.router.navigate(['/user-update',id]);
+  }
+
+  showUser(id: any) {
+    this.router.navigate(['/user-show',id]);
+  }
+
+  isSuperAdmin() {
+    return this.authService.isSuperAdmin();
   }
 }

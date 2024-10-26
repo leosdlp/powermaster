@@ -14,7 +14,7 @@ export class AdminAuthService {
     const newUsers = [];
     const temp = this.usersTemp;
     for (const user of temp) {
-      newUsers.push({ id: user._id, username: user.username, password: user.password, email: user.email, benchPr: user.benchPr, squatPr: user.squatPr, deadliftPr: user.deadliftPr });
+      newUsers.push({ id: user._id, username: user.username, password: user.password, email: user.email,role: user.role, benchPr: user.benchPr, squatPr: user.squatPr, deadliftPr: user.deadliftPr });
     }
     this.users = newUsers;
   }
@@ -25,13 +25,34 @@ export class AdminAuthService {
     return this.users;
   }
 
+  getUserById(id: String): User[] {
+    this.setApiUsers();
+    const seances = this.users.filter((user: User) => String(user.id) === String(id));
+    return seances;
+  }
+
   isAdmin(): boolean {
     try {
       const currentUserString = localStorage.getItem('currentUser');
       if (currentUserString) {
         const currentUser = JSON.parse(currentUserString);
         if (currentUser && currentUser.username) {
-          return currentUser.username === 'admin';
+          return currentUser.role === 'admin' || currentUser.role === 'superadmin';
+        }
+      }
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+    }
+    return false;
+  }
+
+  isSuperAdmin(): boolean {
+    try {
+      const currentUserString = localStorage.getItem('currentUser');
+      if (currentUserString) {
+        const currentUser = JSON.parse(currentUserString);
+        if (currentUser && currentUser.username) {
+          return currentUser.role === 'superadmin';
         }
       }
     } catch (error) {
@@ -90,15 +111,19 @@ export class AdminAuthService {
     return false;
   }
 
-  register(id:string, username: string, password: string, verifPassword: string, email: string, benchPr: number, squatPr: number, deadliftPr: number): boolean {
+  register(id:string, username: string, password: string, verifPassword: string, email: string, role: string, benchPr: number, squatPr: number, deadliftPr: number): boolean {
     const existingUser = this.users.find((user) => user.username === username);
-    if (existingUser && username === 'admin') {
-      return false;
-    }
-    else{
-      if (!existingUser && verifPassword == password){
-        this.users.push({ id, username, password, email, benchPr, squatPr, deadliftPr });
-        return true;
+    const currentUserString = localStorage.getItem('currentUser');
+    if (currentUserString) {
+      const currentUser = JSON.parse(currentUserString);
+      if (existingUser && currentUser.role === 'admin') {
+        return false;
+      }
+      else{
+        if (!existingUser && verifPassword == password){
+          this.users.push({ id, username, password, email, role, benchPr, squatPr, deadliftPr });
+          return true;
+        }
       }
     }
     return false;

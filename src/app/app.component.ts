@@ -53,6 +53,10 @@ export class AppComponent implements OnInit {
     return this.authService.isAdmin();
   }
 
+  isSuperAdmin(): boolean {
+    return this.authService.isSuperAdmin();
+  }
+
   isLoggedIn(){
     return this.authService.isLoggedIn();
   }

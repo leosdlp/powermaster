@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --button-general: #0040d6;
+  --button-general-hover: #5985eb;
+  --button-neutral: #fefefe;
+  --button-neutral-hover: #e0e0e0;
+}
+.button-general {
+  background-color: var(--button-general);
+  color: #fff;
+  padding: .5rem;
+}
+
+.button-neutral {
+  background-color: var(--button-general);
+  color: #fff;
+  padding: .5rem;
+}
+
+

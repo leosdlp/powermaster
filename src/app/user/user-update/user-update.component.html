@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 contProfil">
+      <div class="row">
+        <h1 class="col-5">{{username}}</h1>
+      </div>
+      <form [formGroup]="userForm" (ngSubmit)="updateUser()">
+        <div>
+          <label for="username">Username:</label>
+          <input formControlName="username" type="text" [(ngModel)]="username">
+        </div>
+        <div>
+          <label for="password">Mot de passe:</label>
+          <input formControlName="password" type="password" [(ngModel)]="password">
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input formControlName="email" type="email" [(ngModel)]="email">
+        </div>
+        <div>
+          <label for="role">Rôle:</label>
+          <select name="role" id="role" formControlName="role" [(ngModel)]="role">
+            <option value="client">Client</option>
+            <option value="admin">Admin</option>
+            <option value="superadmin">Super Admin</option>
+          </select>
+        </div>
+        <div>
+          <label for="benchPr">Bench Pr:</label>
+          <input formControlName="benchPr" type="benchPr" [(ngModel)]="benchPr">
+        </div>
+        <div>
+          <label for="squatPr">Squat Pr:</label>
+          <input formControlName="squatPr" type="squatPr" [(ngModel)]="squatPr">
+        </div>
+        <div>
+          <label for="deadliftPr">Deadlift Pr:</label>
+          <input formControlName="deadliftPr" type="deadliftPr" [(ngModel)]="deadliftPr">
+        </div>
+        <button type="submit">Update User</button>
+      </form>
+      <button routerLink="/user-list" [routerLinkActive]="['active']" class="col-4">Retour</button>
+    </div>
+  </div>
+</div>
+

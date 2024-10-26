@@ -1,0 +1,17 @@
+
+<div *ngFor="let userShow of user" class="col-3">
+  <div class="col-12">
+    <h2>{{ userShow.username }}</h2>
+    <div class="infos row">
+      <p class="col-10">Id : {{ userShow.id }}</p>
+      <p class="col-10">Email : {{ userShow.email }}</p>
+      <p class="col-10">Role : {{ userShow.role }}</p>
+      <p class="col-10">Bench Pr : {{ userShow.benchPr }}</p>
+      <p class="col-10">Squat Pr : {{ userShow.squatPr }}</p>
+      <p class="col-10">Deadlift Pr : {{ userShow.deadliftPr }}</p>
+    </div>
+    <div class="buttons row">
+      <button routerLink="/user-list" [routerLinkActive]="['active']" class="col-4">Retour</button>
+    </div>
+  </div>
+</div>

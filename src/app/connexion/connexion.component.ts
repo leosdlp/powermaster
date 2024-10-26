@@ -24,6 +24,7 @@ export class ConnexionComponent implements OnInit{
   username:string = '';
   password:string = '';
   email:string = '';
+  role:string = '';
   passwordVerif:string = '';
   connexion: boolean = true;
   inscription: boolean = false;
@@ -69,6 +70,7 @@ export class ConnexionComponent implements OnInit{
     formData.append("username", this.username);
     formData.append("password", this.password);
     formData.append("email", this.email);
+    formData.append("role", 'client');
     formData.append("benchPr", String(this.benchPr));
     formData.append("squatPr", String(this.squatPr));
     formData.append("deadliftPr", String(this.deadliftPr));
@@ -82,7 +84,7 @@ export class ConnexionComponent implements OnInit{
 
   register(): void {
     const verifPassword = this.password == this.passwordVerif;
-    const success = this.authService.register(this.id, this.username, this.password, this.passwordVerif, this.email, this.benchPr, this.squatPr, this.deadliftPr);
+    const success = this.authService.register(this.id, this.username, this.password, this.passwordVerif, this.email,'client', this.benchPr, this.squatPr, this.deadliftPr);
     if (success) {
       if(verifPassword){
         this.addUsers();

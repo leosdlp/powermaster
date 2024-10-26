@@ -1,4 +1,3 @@
-
 <div *ngFor="let user of users" class="col-3">
   <div class="col-12">
     <h2>{{ user.username }}</h2>
@@ -7,8 +6,9 @@
       <p class="col-10">Email : {{ user.email }}</p>
     </div>
     <div class="buttons row">
-      <button (click)="deleteUser(user.id)" class="col-4">Supprimer</button>
-      <!-- <button (click)="modifierFournisseur(fournisseur.id)" class="col-4">Modifier</button> -->
+      <button (click)="deleteUser(user.id)" class="col-4" *ngIf="isSuperAdmin()">Supprimer</button>
+      <button (click)="modifierUser(user.id)" class="col-4" *ngIf="isSuperAdmin()">Modifier</button>
+      <button (click)="showUser(user.id)" class="col-4 ">Voir</button>
     </div>
   </div>
 </div>

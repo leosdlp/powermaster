@@ -1,0 +1,1 @@
+:root{--button-general: #0040d6;--button-general-hover: #5985eb;--button-neutral: #fefefe;--button-neutral-hover: #e0e0e0}.button-general,.button-neutral{background-color:var(--button-general);color:#fff;padding:.5rem}
